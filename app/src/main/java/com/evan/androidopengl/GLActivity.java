@@ -1,14 +1,13 @@
 package com.evan.androidopengl;
 
-import android.opengl.GLES20;
-import android.opengl.GLSurfaceView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.evan.androidopengl.render.AccGraphRender;
 import com.evan.androidopengl.render.GLView;
 
 public class GLActivity extends AppCompatActivity {
+    private static final String Tag = "GLActivity";
     private GLView mGLView;
 
     @Override
@@ -16,9 +15,16 @@ public class GLActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_gl);
+        try {
+            String className = getIntent().getStringExtra("className");
+            Class clazz = Class.forName(className);
 
-        mGLView = findViewById(R.id.gl_view);
-        mGLView.setRenderClassAndMode(AccGraphRender.class, -1);
+            Log.i(Tag, "onCreate: " + className);
+            mGLView = findViewById(R.id.gl_view);
+            mGLView.setRenderClass(clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

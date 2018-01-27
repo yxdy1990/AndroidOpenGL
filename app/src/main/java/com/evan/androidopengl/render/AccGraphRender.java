@@ -23,7 +23,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 
 public class AccGraphRender extends GLRender {
-    public static String Tag = "AccelerGraphRender";
+    private static final String Tag = "AccelerGraphRender";
     public static int SENSOR_HISTORY_LEN = 100;
     public static float SENSOR_FILTER = 0.1f;
 
@@ -39,6 +39,7 @@ public class AccGraphRender extends GLRender {
 
     public AccGraphRender(GLSurfaceView view) {
         super(view);
+
         Log.i(Tag, "AccGraphRender constructor called.");
 
         sm = (SensorManager) mView.getContext().getSystemService(Context.SENSOR_SERVICE);
@@ -126,7 +127,6 @@ public class AccGraphRender extends GLRender {
         Log.i(Tag, "onSurfaceCreated.");
         //开启深度测试
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         if (mProgram == 0) {
             mProgram = Gl2Utils.createGlProgramByRes(mView.getResources(), "graph_shader.glslv", "graph_shader.glslf");
         }

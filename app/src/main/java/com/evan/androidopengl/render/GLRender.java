@@ -12,10 +12,12 @@ import android.view.View;
  */
 
 public abstract class GLRender implements GLSurfaceView.Renderer {
-    public static String Tag = "GLRender";
+    private static final String Tag = "GLRender";
     protected GLSurfaceView mView;
+    protected int mRenderMode;
 
     public GLRender(GLSurfaceView view) {
+        this.mRenderMode = GLSurfaceView.RENDERMODE_WHEN_DIRTY;
         this.mView = view;
     }
 

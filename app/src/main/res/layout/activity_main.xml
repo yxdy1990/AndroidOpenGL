@@ -16,6 +16,12 @@
             android:layout_height="wrap_content"
             android:text="加速计曲线" />
 
+        <Button
+            android:id="@+id/three_d_pikachu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3D 皮卡丘" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

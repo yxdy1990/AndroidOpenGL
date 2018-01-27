@@ -14,10 +14,9 @@ import java.lang.reflect.Constructor;
  */
 
 public class GLView extends GLSurfaceView {
-    public static String Tag = "GLView";
+    private static final String Tag = "GLView";
     private Class<? extends GLRender> clazz;
     private GLRender render;
-    private int renderMode;
 
     public GLView(Context context) {
         this(context, null);
@@ -25,15 +24,11 @@ public class GLView extends GLSurfaceView {
 
     public GLView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Log.i(Tag, "GLView Constructor called.");
-        this.renderMode = GLSurfaceView.RENDERMODE_WHEN_DIRTY;
     }
 
-    public void setRenderClassAndMode(Class<? extends GLRender> clazz, int renderMode) {
+    public void setRenderClass(Class<? extends GLRender> clazz) {
         this.clazz = clazz;
-        if (renderMode >= 0) {
-            this.renderMode = renderMode;
-        }
+
         initGLRender();
     }
 
@@ -48,10 +43,11 @@ public class GLView extends GLSurfaceView {
                 if (render != null) {
                     setEGLContextClientVersion(2);
                     setRenderer(render);
-                    setRenderMode(renderMode);
+                    setRenderMode(render.mRenderMode);
                 }
             }
         } catch (Exception e) {
+            Log.e(Tag, "initGLRender Exception!");
             e.printStackTrace();
         }
     }
